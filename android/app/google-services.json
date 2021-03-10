@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "75425413063",
+    "project_id": "openmind-467d2",
+    "storage_bucket": "openmind-467d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75425413063:android:2a901e03e2f87056d2cbe2",
+        "android_client_info": {
+          "package_name": "com.example.open_mind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75425413063-sm3dlpt14682b3033heovq0agv6rkshc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCy9f10zpe0HMdbJ1f8PxFKC1r5WAia3Rs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75425413063-sm3dlpt14682b3033heovq0agv6rkshc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
