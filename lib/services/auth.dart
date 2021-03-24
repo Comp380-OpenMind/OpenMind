@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:open_mind/helperfunctions/sharedpref_helper.dart';
+import 'package:open_mind/screens/home.dart';
+import 'package:open_mind/services/database.dart';
 
 class AuthMethods {
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -33,6 +35,19 @@ class AuthMethods {
       SharedPreferenceHelper().saveUserId(userDetails.uid);
       SharedPreferenceHelper().saveDisplayName(userDetails.displayName);
       SharedPreferenceHelper().saveUserProfileUrl(userDetails.photoURL);
+
+      Map<String, dynamic> userInfoMap = {
+        "email": userDetails.email,
+        "username": userDetails.email.replaceAll("@gmail.com", ""),
+        "imgUrl": userDetails.photoURL
+      };
+
+      DatabaseMethods()
+          .addUserInfoToDB(userDetails.uid, userInfoMap)
+          .then((value) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => Home()));
+      });
     }
   }
 }
