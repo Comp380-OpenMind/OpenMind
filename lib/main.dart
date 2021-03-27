@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       home: FutureBuilder(
         future: AuthMethods().getCurrentUser(),
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
+          // if the user is already signed in then go straight to home, else have them sign in
           if (snapshot.hasData) {
             return Home();
           } else {

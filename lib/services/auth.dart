@@ -38,9 +38,11 @@ class AuthMethods {
       SharedPreferenceHelper().saveUserProfileUrl(userDetails.photoURL);
 
       Map<String, dynamic> userInfoMap = {
+        "userID": userDetails.uid,
         "email": userDetails.email,
         "username": userDetails.email.replaceAll("@gmail.com", ""),
-        "imgUrl": userDetails.photoURL
+        "imgUrl": userDetails.photoURL,
+        "name": userDetails.displayName
       };
 
       DatabaseMethods()
