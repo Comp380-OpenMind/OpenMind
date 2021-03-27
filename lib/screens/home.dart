@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:open_mind/screens/signin.dart';
 import 'package:open_mind/services/auth.dart';
+import 'package:open_mind/services/database.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -9,6 +11,43 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   bool isSearching = false;
+  Stream usersStream;
+
+  TextEditingController searchUsernameEditingController =
+      TextEditingController();
+
+  onSearchBtnClick() async {
+    isSearching = true;
+    setState(() {});
+    usersStream = await DatabaseMethods()
+        .getUserbyUserName(searchUsernameEditingController.text);
+    setState(() {});
+  }
+
+  Widget searchUsersList() {
+    return StreamBuilder(
+      stream: usersStream,
+      builder: (context, snapshot) {
+        return snapshot.hasData
+            ? ListView.builder(
+                itemCount: snapshot.data.docs.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  // A DocumentSnapshot contains data read from a document in your Cloud Firestore database
+                  DocumentSnapshot ds = snapshot.data.docs[index];
+                  return Image.network(ds["imgUrl"]);
+                },
+              )
+            : Center(
+                child: CircularProgressIndicator(),
+              );
+      },
+    );
+  }
+
+  Widget chatRoomsList() {
+    return Container();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +74,13 @@ class _HomeState extends State<Home> {
                     // back arrow by the username search bar
                     isSearching
                         ? GestureDetector(
+                            // on back button tap
                             onTap: () {
+                              // makes the back arrow disappear when not searching, and clears text box when arrow is pressed
                               isSearching = false;
+                              searchUsernameEditingController.text = "";
+                              // setState makes it so that it's updated with the latest information
+                              setState(() {});
                             },
                             child: Padding(
                                 padding: EdgeInsets.only(right: 12),
@@ -58,15 +102,19 @@ class _HomeState extends State<Home> {
                           children: [
                             Expanded(
                                 child: TextField(
+                              controller: searchUsernameEditingController,
                               decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "username"),
                             )),
                             GestureDetector(
+                                //when the search button is tapped
                                 onTap: () {
-                                  isSearching = true;
-                                  // setState makes it so that it's updated with the latest information
-                                  setState(() {});
+                                  // will only execute if there is text in the search bar
+                                  if (searchUsernameEditingController.text !=
+                                      "") {
+                                    onSearchBtnClick();
+                                  }
                                 },
                                 child: Icon(Icons.search))
                           ],
@@ -74,7 +122,9 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   ],
-                )
+                ),
+                // if the user is searching show the users list, if not then show the chat rooms list
+                isSearching ? searchUsersList() : chatRoomsList()
               ],
             )));
   }
