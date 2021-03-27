@@ -4,6 +4,8 @@ import 'package:open_mind/screens/signin.dart';
 import 'package:open_mind/services/auth.dart';
 import 'package:open_mind/services/database.dart';
 
+import 'chatscreen.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -25,19 +27,30 @@ class _HomeState extends State<Home> {
   }
 
   // returns all the information for the person the user searched
-  Widget searchListUserTile(String profileUrl, name, email) {
-    return Row(
-      children: [
-        Image.network(
-          profileUrl,
-          height: 30,
-          width: 30,
-        ),
-        SizedBox(width: 12),
-        Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [Text(name), Text(email)])
-      ],
+  Widget searchListUserTile({String profileUrl, name, username, email}) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ChatScreen(username, name)));
+      },
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(40),
+            child: Image.network(
+              profileUrl,
+              height: 30,
+              width: 30,
+            ),
+          ),
+          SizedBox(width: 12),
+          Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [Text(name), Text(email)])
+        ],
+      ),
     );
   }
 
@@ -53,7 +66,10 @@ class _HomeState extends State<Home> {
                   // A DocumentSnapshot contains data read from a document in your Cloud Firestore database
                   DocumentSnapshot ds = snapshot.data.docs[index];
                   return searchListUserTile(
-                      ds["imgUrl"], ds["name"], ds["email"]);
+                      profileUrl: ds["imgUrl"],
+                      name: ds["name"],
+                      email: ds["email"],
+                      username: ds["username"]);
                 },
               )
             : Center(

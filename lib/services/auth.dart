@@ -40,7 +40,10 @@ class AuthMethods {
       Map<String, dynamic> userInfoMap = {
         "userID": userDetails.uid,
         "email": userDetails.email,
-        "username": userDetails.email.replaceAll("@gmail.com", ""),
+        "username": userDetails.email
+            .replaceAll("@gmail.com", "")
+            .replaceAll("@my.csun.edu", "")
+            .replaceAll(".", ""),
         "imgUrl": userDetails.photoURL,
         "name": userDetails.displayName
       };
