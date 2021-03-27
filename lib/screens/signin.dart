@@ -9,8 +9,10 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
+    // Scaffold is the banner thingy at the top
     return Scaffold(
         appBar: AppBar(title: Text("OpenMind")),
+        // Provides the sign-in options
         body: Center(
           child: GestureDetector(
             onTap: () {
@@ -21,6 +23,7 @@ class _SignInState extends State<SignIn> {
                 borderRadius: BorderRadius.circular(24),
                 color: Color(0xffDB4437),
               ),
+              // Padding makes it so that the button is centered
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
               child: Text(
                 "Sign in with google",
