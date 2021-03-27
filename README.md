@@ -1,16 +1,9 @@
-# open_mind
+# OpenMind
 
-A new Flutter project.
+OpenMind is an application with the goal of helping people with opposing opinions engage in a discussion and hopefully find a middle ground. 
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+For installation, follow the instructions at https://flutter.dev/docs/get-started/install.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Once everything is completely installed, copy the main github repository.
