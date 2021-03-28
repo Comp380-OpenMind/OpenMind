@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:open_mind/helperfunctions/sharedpref_helper.dart';
+import 'package:open_mind/services/database.dart';
+import 'package:random_string/random_string.dart';
 
 class ChatScreen extends StatefulWidget {
   final String chatWithUsername, name;
@@ -9,8 +11,9 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  String chatRoomId;
+  String chatRoomId, messageId = "";
   String myName, myProfilePic, myUserName, myEmail;
+  TextEditingController messageTextEditingController = TextEditingController();
 
   getMyInfoFromSharedPreference() async {
     myName = await SharedPreferenceHelper().getDisplayName();
@@ -26,6 +29,48 @@ class _ChatScreenState extends State<ChatScreen> {
       return "$b\_$a";
     } else {
       return "$a\_$b";
+    }
+  }
+
+  addMessage(bool sendClicked) {
+    if (messageTextEditingController.text != "") {
+      String message = messageTextEditingController.text;
+
+      // keep track of the timestamps for each message for correct placement
+      var lastMessageTs = DateTime.now();
+
+      //create a map to store info for messages
+      Map<String, dynamic> messageInfoMap = {
+        "message": message,
+        "sendBy": myUserName,
+        "ts": lastMessageTs,
+        "imgUrl": myProfilePic
+      };
+
+      //messageId
+      if (messageId == "") {
+        messageId = randomAlphaNumeric(12);
+      }
+
+      DatabaseMethods()
+          .addMessage(chatRoomId, messageId, messageInfoMap)
+          .then((value) {
+        Map<String, dynamic> lastMessageInfoMap = {
+          "lastMessage": message,
+          "lastMessageSendTs": lastMessageTs,
+          "lastMessageSendBy": myUserName
+        };
+
+        DatabaseMethods().updateLastMessageSend(chatRoomId, lastMessageInfoMap);
+
+        if (sendClicked) {
+          // remove the text in the message input field
+          messageTextEditingController.text = "";
+
+          //make message id blank to get regenerated on nextmessage sent
+          messageId = "";
+        }
+      });
     }
   }
 
@@ -63,6 +108,11 @@ class _ChatScreenState extends State<ChatScreen> {
                       Expanded(
                           // text the user inputs
                           child: TextField(
+                        controller: messageTextEditingController,
+                        // makes it update in real time
+                        onChanged: (value) {
+                          addMessage(false);
+                        },
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                             border: InputBorder.none,
@@ -70,7 +120,12 @@ class _ChatScreenState extends State<ChatScreen> {
                             hintStyle: TextStyle(
                                 color: Colors.white.withOpacity(0.6))),
                       )),
-                      Icon(Icons.send, color: Colors.white)
+                      GestureDetector(
+                        onTap: () {
+                          addMessage(true);
+                        },
+                        child: Icon(Icons.send, color: Colors.white),
+                      ),
                     ],
                   )),
             )
