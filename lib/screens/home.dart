@@ -41,6 +41,7 @@ class _HomeState extends State<Home> {
     setState(() {});
     usersStream = await DatabaseMethods()
         .getUserbyUserName(searchUsernameEditingController.text);
+
     setState(() {});
   }
 
@@ -90,10 +91,10 @@ class _HomeState extends State<Home> {
                   // A DocumentSnapshot contains data read from a document in your Cloud Firestore database
                   DocumentSnapshot ds = snapshot.data.docs[index];
                   return searchListUserTile(
-                      profileUrl: ds["imgUrl"],
-                      name: ds["name"],
-                      email: ds["email"],
-                      username: ds["username"]);
+                      profileUrl: ds.data()["imgUrl"],
+                      name: ds.data()["name"],
+                      email: ds.data()["email"],
+                      username: ds.data()["username"]);
                 },
               )
             : Center(
