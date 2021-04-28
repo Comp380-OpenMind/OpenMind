@@ -161,10 +161,6 @@ class _ChatScreenState extends State<ChatScreen> {
                           // text the user inputs
                           child: TextField(
                         controller: messageTextEditingController,
-                        // makes it update in real time
-                        onChanged: (value) {
-                          addMessage(false);
-                        },
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                             border: InputBorder.none,
