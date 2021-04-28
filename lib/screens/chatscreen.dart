@@ -92,7 +92,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 bottomLeft:
                     sendByMe ? Radius.circular(24) : Radius.circular(10),
               ),
-              color: Colors.blue,
+              // if its sent by me make it blue, otherwise make it another colow
+              color: sendByMe ? Colors.blue : Colors.grey,
             ),
             padding: EdgeInsets.all(16),
             child: Text(

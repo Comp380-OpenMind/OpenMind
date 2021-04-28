@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
       title: 'OpenMind',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        //sets the main color of the whole application
+        primarySwatch: Colors.indigo,
       ),
       home: FutureBuilder(
         future: AuthMethods().getCurrentUser(),
