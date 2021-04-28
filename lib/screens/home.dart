@@ -4,6 +4,7 @@ import 'package:open_mind/helperfunctions/sharedpref_helper.dart';
 import 'package:open_mind/screens/signin.dart';
 import 'package:open_mind/services/auth.dart';
 import 'package:open_mind/services/database.dart';
+import 'package:open_mind/widgets/navbar.dart';
 
 import 'chatscreen.dart';
 
@@ -117,6 +118,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: NavBar(),
         appBar: AppBar(title: Text("OpenMind"), actions: [
           InkWell(
             onTap: () {
