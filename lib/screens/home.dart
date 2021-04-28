@@ -119,19 +119,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: NavBar(),
-        appBar: AppBar(title: Text("OpenMind"), actions: [
-          InkWell(
-            onTap: () {
-              AuthMethods().signOut().then((s) {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) => SignIn()));
-              });
-            },
-            child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Icon(Icons.exit_to_app)),
-          )
-        ]),
+        appBar: AppBar(title: Text("OpenMind"), actions: []),
         body: Container(
             margin: EdgeInsets.symmetric(horizontal: 24),
             child: Column(
