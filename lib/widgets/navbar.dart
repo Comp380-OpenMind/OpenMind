@@ -10,16 +10,25 @@ class NavBar extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
-            child: Text(
-              'Side menu',
-              style: TextStyle(color: Colors.white, fontSize: 25),
+          UserAccountsDrawerHeader(
+            accountName: Text('Oflutter.com'),
+            accountEmail: Text('example@gmail.com'),
+            currentAccountPicture: CircleAvatar(
+              child: ClipOval(
+                child: Image.network(
+                  'https://oflutter.com/wp-content/uploads/2021/02/girl-profile.png',
+                  fit: BoxFit.cover,
+                  width: 90,
+                  height: 90,
+                ),
+              ),
             ),
             decoration: BoxDecoration(
-              color: Colors.indigo,
-              //image: DecorationImage(
-              //fit: BoxFit.fill,
-              //image: AssetImage('assets/images/cat.jpg'))
+              color: Colors.blue,
+              image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: NetworkImage(
+                      'https://oflutter.com/wp-content/uploads/2021/02/profile-bg3.jpg')),
             ),
           ),
           ListTile(
