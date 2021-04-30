@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:open_mind/services/auth.dart';
 import 'package:open_mind/screens/signin.dart';
 import 'package:open_mind/screens/settings.dart';
+import 'package:open_mind/helperfunctions/sharedpref_helper.dart';
 
 class NavBar extends StatelessWidget {
   @override

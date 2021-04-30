@@ -76,6 +76,7 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
+  //theres an issue here where messages are overflowing, delete this comment when fixed
   Widget chatMessageTile(String message, bool sendByMe) {
     return Row(
       mainAxisAlignment:

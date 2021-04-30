@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:open_mind/helperfunctions/sharedpref_helper.dart';
-import 'package:open_mind/screens/signin.dart';
-import 'package:open_mind/services/auth.dart';
 import 'package:open_mind/services/database.dart';
 import 'package:open_mind/widgets/navbar.dart';
-
 import 'chatscreen.dart';
 
 class Home extends StatefulWidget {
