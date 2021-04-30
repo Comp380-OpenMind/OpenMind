@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:open_mind/screens/home.dart';
 import 'package:open_mind/services/auth.dart';
 import 'package:open_mind/screens/signin.dart';
 import 'package:open_mind/screens/settings.dart';
-import 'package:open_mind/helperfunctions/sharedpref_helper.dart';
+import 'package:open_mind/screens/profile.dart';
+import 'package:open_mind/screens/search.dart';
 
 class NavBar extends StatelessWidget {
   @override
@@ -33,14 +35,20 @@ class NavBar extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.input),
-            title: Text('Welcome'),
-            onTap: () => {},
+            leading: Icon(Icons.search),
+            title: Text('Search'),
+            onTap: () => {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => OpenMindSearch()))
+            },
           ),
           ListTile(
             leading: Icon(Icons.verified_user),
             title: Text('Profile'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => OpenMindProfile()))
+            },
           ),
           ListTile(
             leading: Icon(Icons.settings),
@@ -51,9 +59,12 @@ class NavBar extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.border_color),
-            title: Text('Feedback'),
-            onTap: () => {Navigator.of(context).pop()},
+            leading: Icon(Icons.home),
+            title: Text('Home Page'),
+            onTap: () => {
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => Home()))
+            },
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app),
