@@ -25,3 +25,9 @@ doc/api/
 
 # Mac
 .DS_Store
+.idea/libraries/KotlinJavaRuntime.xml
+.idea/runConfigurations/main_dart.xml
+.metadata
+android/app/src/main/kotlin/com/example/openmind/MainActivity.kt
+android/openmind_android.iml
+openmind.iml
