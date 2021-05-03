@@ -4,6 +4,7 @@ import 'package:open_mind/helperfunctions/sharedpref_helper.dart';
 import 'package:open_mind/services/database.dart';
 import 'package:open_mind/widgets/navbar.dart';
 import 'chatscreen.dart';
+import 'package:open_mind/widgets/dropdowntile.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -119,7 +120,7 @@ class _HomeState extends State<Home> {
         appBar: AppBar(title: Text("OpenMind"), actions: []),
         body: Container(
             margin: EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
+            child: ListView(
               children: [
                 Row(
                   children: [
@@ -176,7 +177,318 @@ class _HomeState extends State<Home> {
                   ],
                 ),
                 // if the user is searching show the users list, if not then show the chat rooms list
-                isSearching ? searchUsersList() : chatRoomsList()
+                isSearching ? searchUsersList() : chatRoomsList(),
+
+                // here are the topic widgets
+                // there are ontop prompts on the ListTile sections
+                // linking to new pages can be done there
+                // there is also probably a more efficent way to do this with
+                // the database but this should be fine for now
+                new Container(
+                  child: Card(
+                    child: Column(
+                      children: [
+                        ExpansionTile(
+                          trailing: SizedBox.shrink(),
+                          title: Text('Gun Control',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontWeight: FontWeight.w500)),
+                          subtitle: Text(
+                            'Gun Control info...',
+                            textAlign: TextAlign.center,
+                          ),
+                          children: [
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am for this topic',
+                                  textAlign: TextAlign.center,
+                                )),
+                            Divider(
+                              thickness: 1.5,
+                            ),
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am against this topic',
+                                  textAlign: TextAlign.center,
+                                ))
+                          ],
+                        ),
+                        Divider(
+                          thickness: 2.5,
+                        ),
+                        ExpansionTile(
+                          trailing: SizedBox.shrink(),
+                          title: Text('Abortion',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontWeight: FontWeight.w500)),
+                          subtitle: Text(
+                            'Abortion info...',
+                            textAlign: TextAlign.center,
+                          ),
+                          children: [
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am for this topic',
+                                  textAlign: TextAlign.center,
+                                )),
+                            Divider(
+                              thickness: 1.5,
+                            ),
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am against this topic',
+                                  textAlign: TextAlign.center,
+                                ))
+                          ],
+                        ),
+                        Divider(
+                          thickness: 2.5,
+                        ),
+                        ExpansionTile(
+                          trailing: SizedBox.shrink(),
+                          title: Text('Religious Freedom',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontWeight: FontWeight.w500)),
+                          subtitle: Text(
+                            'Religious Freedom info...',
+                            textAlign: TextAlign.center,
+                          ),
+                          children: [
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am for this topic',
+                                  textAlign: TextAlign.center,
+                                )),
+                            Divider(
+                              thickness: 1.5,
+                            ),
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am against this topic',
+                                  textAlign: TextAlign.center,
+                                ))
+                          ],
+                        ),
+                        Divider(
+                          thickness: 2.5,
+                        ),
+                        ExpansionTile(
+                          trailing: SizedBox.shrink(),
+                          title: Text('Animal Rights',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontWeight: FontWeight.w500)),
+                          subtitle: Text(
+                            'Animal Rights info...',
+                            textAlign: TextAlign.center,
+                          ),
+                          children: [
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am for this topic',
+                                  textAlign: TextAlign.center,
+                                )),
+                            Divider(
+                              thickness: 1.5,
+                            ),
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am against this topic',
+                                  textAlign: TextAlign.center,
+                                ))
+                          ],
+                        ),
+                        Divider(
+                          thickness: 2.5,
+                        ),
+                        ExpansionTile(
+                          trailing: SizedBox.shrink(),
+                          title: Text('Vaccines',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontWeight: FontWeight.w500)),
+                          subtitle: Text(
+                            'Vaccines info...',
+                            textAlign: TextAlign.center,
+                          ),
+                          children: [
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am for this topic',
+                                  textAlign: TextAlign.center,
+                                )),
+                            Divider(
+                              thickness: 1.5,
+                            ),
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am against this topic',
+                                  textAlign: TextAlign.center,
+                                ))
+                          ],
+                        ),
+                        Divider(
+                          thickness: 2.5,
+                        ),
+                        ExpansionTile(
+                          trailing: SizedBox.shrink(),
+                          title: Text('Privacy Rights',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontWeight: FontWeight.w500)),
+                          subtitle: Text(
+                            'Privacy Rights info...',
+                            textAlign: TextAlign.center,
+                          ),
+                          children: [
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am for this topic',
+                                  textAlign: TextAlign.center,
+                                )),
+                            Divider(
+                              thickness: 1.5,
+                            ),
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am against this topic',
+                                  textAlign: TextAlign.center,
+                                ))
+                          ],
+                        ),
+                        Divider(
+                          thickness: 2.5,
+                        ),
+                        ExpansionTile(
+                          trailing: SizedBox.shrink(),
+                          title: Text('Global Climate Change',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontWeight: FontWeight.w500)),
+                          subtitle: Text(
+                            'Global Climate Change info...',
+                            textAlign: TextAlign.center,
+                          ),
+                          children: [
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am for this topic',
+                                  textAlign: TextAlign.center,
+                                )),
+                            Divider(
+                              thickness: 1.5,
+                            ),
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am against this topic',
+                                  textAlign: TextAlign.center,
+                                ))
+                          ],
+                        ),
+                        Divider(
+                          thickness: 2.5,
+                        ),
+                        ExpansionTile(
+                          trailing: SizedBox.shrink(),
+                          title: Text('Evolution',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontWeight: FontWeight.w500)),
+                          subtitle: Text(
+                            'Evolution info...',
+                            textAlign: TextAlign.center,
+                          ),
+                          children: [
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am for this topic',
+                                  textAlign: TextAlign.center,
+                                )),
+                            Divider(
+                              thickness: 1.5,
+                            ),
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am against this topic',
+                                  textAlign: TextAlign.center,
+                                ))
+                          ],
+                        ),
+                        Divider(
+                          thickness: 2.5,
+                        ),
+                        ExpansionTile(
+                          trailing: SizedBox.shrink(),
+                          title: Text('Marriage Equality',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontWeight: FontWeight.w500)),
+                          subtitle: Text(
+                            'Marriage Equality...',
+                            textAlign: TextAlign.center,
+                          ),
+                          children: [
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am for this topic',
+                                  textAlign: TextAlign.center,
+                                )),
+                            Divider(
+                              thickness: 1.5,
+                            ),
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am against this topic',
+                                  textAlign: TextAlign.center,
+                                ))
+                          ],
+                        ),
+                        Divider(
+                          thickness: 2.5,
+                        ),
+                        ExpansionTile(
+                          trailing: SizedBox.shrink(),
+                          title: Text('Transgender Rights',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontWeight: FontWeight.w500)),
+                          subtitle: Text(
+                            'Transgender Rights info...',
+                            textAlign: TextAlign.center,
+                          ),
+                          children: [
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am for this topic',
+                                  textAlign: TextAlign.center,
+                                )),
+                            Divider(
+                              thickness: 1.5,
+                            ),
+                            ListTile(
+                                onTap: () {},
+                                title: Text(
+                                  'I am against this topic',
+                                  textAlign: TextAlign.center,
+                                ))
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                )
               ],
             )));
   }
