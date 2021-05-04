@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:open_mind/helperfunctions/sharedpref_helper.dart';
+import 'package:open_mind/screens/searching.dart';
 import 'package:open_mind/services/database.dart';
 import 'package:open_mind/widgets/navbar.dart';
 import 'chatscreen.dart';
@@ -124,22 +125,6 @@ class _HomeState extends State<Home> {
               children: [
                 Row(
                   children: [
-                    // back arrow by the username search bar
-                    isSearching
-                        ? GestureDetector(
-                            // on back button tap
-                            onTap: () {
-                              // makes the back arrow disappear when not searching, and clears text box when arrow is pressed
-                              isSearching = false;
-                              searchUsernameEditingController.text = "";
-                              // setState makes it so that it's updated with the latest information
-                              setState(() {});
-                            },
-                            child: Padding(
-                                padding: EdgeInsets.only(right: 12),
-                                child: Icon(Icons.arrow_back)),
-                          )
-                        : Container(),
                     // username search bar
                     Expanded(
                       child: Container(
@@ -199,7 +184,20 @@ class _HomeState extends State<Home> {
                           ),
                           children: [
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Gun Control';
+                                  String stance = 'for';
+                                  DatabaseMethods()
+                                      .addUserToTopic(topic, stance, myEmail);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              OpenMindSearching(
+                                                  topic: topic,
+                                                  stance: stance,
+                                                  email: myEmail)));
+                                },
                                 title: Text(
                                   'I am for this topic',
                                   textAlign: TextAlign.center,
@@ -208,7 +206,20 @@ class _HomeState extends State<Home> {
                               thickness: 1.5,
                             ),
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Gun Control';
+                                  String stance = 'against';
+                                  DatabaseMethods()
+                                      .addUserToTopic(topic, stance, myEmail);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              OpenMindSearching(
+                                                  topic: topic,
+                                                  stance: stance,
+                                                  email: myEmail)));
+                                },
                                 title: Text(
                                   'I am against this topic',
                                   textAlign: TextAlign.center,

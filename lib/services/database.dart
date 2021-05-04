@@ -28,6 +28,18 @@ class DatabaseMethods {
         .set(messageInfoMap);
   }
 
+  addUserToTopic(String topic, String stance, String user) {
+    FirebaseFirestore.instance.collection('pairing_system').doc(topic).update({
+      stance: FieldValue.arrayUnion([user])
+    });
+  }
+
+  removeUserFromTopic(String topic, String stance, String user) {
+    FirebaseFirestore.instance.collection('pairing_system').doc(topic).update({
+      stance: FieldValue.arrayRemove([user])
+    });
+  }
+
   updateLastMessageSend(String chatRoomId, Map lastMessageInfoMap) {
     return FirebaseFirestore.instance
         .collection("chatrooms")
