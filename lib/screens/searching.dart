@@ -9,7 +9,7 @@ class OpenMindSearching extends StatelessWidget {
       : super(key: key);
 
   Widget build(BuildContext context) {
-    // if the user leaves the page, this removes them from the database since they are no longer searching
+    // if the user leaves the page, this removes them from the pairing system
     return WillPopScope(
         onWillPop: () async {
           DatabaseMethods().removeUserFromTopic(topic, stance, email);

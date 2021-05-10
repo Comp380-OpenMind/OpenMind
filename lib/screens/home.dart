@@ -5,7 +5,6 @@ import 'package:open_mind/screens/searching.dart';
 import 'package:open_mind/services/database.dart';
 import 'package:open_mind/widgets/navbar.dart';
 import 'chatscreen.dart';
-import 'package:open_mind/widgets/dropdowntile.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -165,7 +164,7 @@ class _HomeState extends State<Home> {
                 isSearching ? searchUsersList() : chatRoomsList(),
 
                 // here are the topic widgets
-                // there are ontop prompts on the ListTile sections
+                // there are ontap prompts on the ListTile sections
                 // linking to new pages can be done there
                 // there is also probably a more efficent way to do this with
                 // the database but this should be fine for now
