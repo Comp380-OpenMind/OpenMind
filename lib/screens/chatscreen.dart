@@ -82,25 +82,32 @@ class _ChatScreenState extends State<ChatScreen> {
       mainAxisAlignment:
           sendByMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
-        Container(
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(24),
-                bottomRight:
-                    sendByMe ? Radius.circular(10) : Radius.circular(24),
-                topRight: Radius.circular(24),
-                bottomLeft:
-                    sendByMe ? Radius.circular(24) : Radius.circular(10),
+        Flexible(
+          child: Container(
+              // could be a good idead to change these constraints in the future since they
+              // were only tested on an iphone 12 pro max in portriat orientation
+              // if the constraints are removed the text will just go from one end of the
+              // screen to another so it isnt the end of the world if we don't use them
+              constraints: BoxConstraints(minWidth: 0, maxWidth: 325),
+              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24),
+                  bottomRight:
+                      sendByMe ? Radius.circular(10) : Radius.circular(24),
+                  topRight: Radius.circular(24),
+                  bottomLeft:
+                      sendByMe ? Radius.circular(24) : Radius.circular(10),
+                ),
+                // if its sent by me make it blue, otherwise make it another colow
+                color: sendByMe ? Colors.blue : Colors.grey,
               ),
-              // if its sent by me make it blue, otherwise make it another colow
-              color: sendByMe ? Colors.blue : Colors.grey,
-            ),
-            padding: EdgeInsets.all(16),
-            child: Text(
-              message,
-              style: TextStyle(color: Colors.white),
-            )),
+              padding: EdgeInsets.all(16),
+              child: Text(
+                message,
+                style: TextStyle(color: Colors.white),
+              )),
+        ),
       ],
     );
   }
