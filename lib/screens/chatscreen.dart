@@ -82,25 +82,27 @@ class _ChatScreenState extends State<ChatScreen> {
       mainAxisAlignment:
           sendByMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
-        Container(
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(24),
-                bottomRight:
-                    sendByMe ? Radius.circular(10) : Radius.circular(24),
-                topRight: Radius.circular(24),
-                bottomLeft:
-                    sendByMe ? Radius.circular(24) : Radius.circular(10),
+        Flexible(
+          child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24),
+                  bottomRight:
+                      sendByMe ? Radius.circular(10) : Radius.circular(24),
+                  topRight: Radius.circular(24),
+                  bottomLeft:
+                      sendByMe ? Radius.circular(24) : Radius.circular(10),
+                ),
+                // makes it so that if its sent by me make it blue, otherwise make it another color
+                color: sendByMe ? Colors.blue : Colors.grey,
               ),
-              // makes it so that if its sent by me make it blue, otherwise make it another color
-              color: sendByMe ? Colors.blue : Colors.grey,
-            ),
-            padding: EdgeInsets.all(16),
-            child: Text(
-              message,
-              style: TextStyle(color: Colors.white),
-            )),
+              padding: EdgeInsets.all(16),
+              child: Text(
+                message,
+                style: TextStyle(color: Colors.white),
+              )),
+        ),
       ],
     );
   }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:open_mind/helperfunctions/sharedpref_helper.dart';
@@ -13,6 +15,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   bool isSearching = false;
+  Timer _timer;
   Stream usersStream;
   String myName, myProfilePic, myUserName, myEmail;
 
@@ -186,16 +189,11 @@ class _HomeState extends State<Home> {
                                 onTap: () {
                                   String topic = 'Gun Control';
                                   String stance = 'for';
-                                  DatabaseMethods()
-                                      .addUserToTopic(topic, stance, myEmail);
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              OpenMindSearching(
-                                                  topic: topic,
-                                                  stance: stance,
-                                                  email: myEmail)));
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
                                 },
                                 title: Text(
                                   'I am for this topic',
@@ -208,16 +206,13 @@ class _HomeState extends State<Home> {
                                 onTap: () {
                                   String topic = 'Gun Control';
                                   String stance = 'against';
-                                  DatabaseMethods()
-                                      .addUserToTopic(topic, stance, myEmail);
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              OpenMindSearching(
-                                                  topic: topic,
-                                                  stance: stance,
-                                                  email: myEmail)));
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
                                 },
                                 title: Text(
                                   'I am against this topic',
