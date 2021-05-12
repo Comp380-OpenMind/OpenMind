@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.open_mind">
    <application
-        android:label="open_mind"
+        android:label="OpenMind"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
