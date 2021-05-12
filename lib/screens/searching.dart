@@ -12,6 +12,7 @@ class Searching extends StatefulWidget {
 
 class _Searching extends State<Searching> with WidgetsBindingObserver {
   bool isSearching = false;
+  bool isFound = false;
   Stream userStream;
 
   getChatRoomIdByUsernames(String a, String b) {
@@ -49,38 +50,6 @@ class _Searching extends State<Searching> with WidgetsBindingObserver {
               builder: (context) => ChatScreen(matchedUser, matchedUser)));
       // Add Your Code here.
     });
-  }
-
-  Widget connectUsers() {
-    String opposingStance = "for";
-    if (widget.stance == 'for') {
-      opposingStance = "against";
-    }
-    opposingStance = widget.topic + ' - ' + opposingStance;
-    return StreamBuilder(
-      stream: userStream,
-      builder: (context, snapshot) {
-        return snapshot.hasData
-            ? ListView.builder(
-                itemCount: snapshot.data.docs.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  // A DocumentSnapshot contains data read from a document in your Cloud Firestore database
-                  DocumentSnapshot ds = snapshot.data.docs[0];
-                  String matchedUser = ds.id;
-                  DatabaseMethods().removeUserFromTopic(widget.myUserName);
-                  return goToChat(matchedUser);
-                },
-              )
-            : Center(
-                child: CircularProgressIndicator(),
-              );
-      },
-    );
-  }
-
-  Widget chatRoomsList() {
-    return Container();
   }
 
   @override
@@ -125,30 +94,30 @@ class _Searching extends State<Searching> with WidgetsBindingObserver {
               .catchError((error) => print("Failed to delete user: $error"));
           return true;
         },
-        child: new Scaffold(
-            appBar: AppBar(title: Text("Searching")),
-            body: Container(
-                //Streams data from the database to find a match
-                child: StreamBuilder(
-              stream: userStream,
-              builder: (context, snapshot) {
-                return snapshot.hasData
-                    ? ListView.builder(
-                        itemCount: snapshot.data.docs.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          // A DocumentSnapshot contains data read from a document in your Cloud Firestore database
-                          DocumentSnapshot ds = snapshot.data.docs[0];
-                          String matchedUser = ds.id;
-                          DatabaseMethods()
-                              .removeUserFromTopic(widget.myUserName);
-                          return goToChat(matchedUser);
-                        },
-                      )
-                    : Center(
-                        child: CircularProgressIndicator(),
-                      );
-              },
-            ))));
+        child: Stack(children: [
+          Scaffold(
+              appBar: AppBar(title: Text("Searching")),
+              body: Container(
+                  //Streams data from the database to find a match
+                  child: Center(child: CircularProgressIndicator()))),
+          //constantly check database for users looking for the same convo
+          StreamBuilder(
+            stream: userStream,
+            builder: (context, snapshot) {
+              return snapshot.hasData
+                  ? ListView.builder(
+                      itemCount: snapshot.data.docs.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        // A DocumentSnapshot contains data read from a document in your Cloud Firestore database
+                        DocumentSnapshot ds = snapshot.data.docs[0];
+                        String matchedUser = ds.id;
+                        return goToChat(matchedUser);
+                      },
+                    )
+                  : Center(child: CircularProgressIndicator());
+            },
+          )
+        ]));
   }
 }

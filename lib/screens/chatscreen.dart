@@ -133,6 +133,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   doThisOnLaunch() async {
     await getMyInfoFromSharedPreference();
+    DatabaseMethods().removeUserFromTopic(myUserName);
     getAndSetMessages();
   }
 
