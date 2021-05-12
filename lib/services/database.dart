@@ -43,8 +43,11 @@ class DatabaseMethods {
         .set({"user": user, "topic-stance": topicStance});
   }
 
-  removeUserFromTopic(String topic, String stance, String user) {
-    FirebaseFirestore.instance.collection('pairing_system').doc(user).delete();
+  Future<void> removeUserFromTopic(String user) {
+    return FirebaseFirestore.instance
+        .collection('pairing_system')
+        .doc(user)
+        .delete();
   }
 
   updateLastMessageSend(String chatRoomId, Map lastMessageInfoMap) {

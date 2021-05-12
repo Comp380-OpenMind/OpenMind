@@ -13,7 +13,6 @@ class Searching extends StatefulWidget {
 class _Searching extends State<Searching> with WidgetsBindingObserver {
   bool isSearching = false;
   Stream userStream;
-  String myName, myProfilePic, myUserName, myEmail;
 
   getChatRoomIdByUsernames(String a, String b) {
     if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
@@ -23,10 +22,16 @@ class _Searching extends State<Searching> with WidgetsBindingObserver {
     }
   }
 
-  getOtherUser(String opposing) async {
+  //constantly checks for another user looking for the same convo
+  getOtherUser() async {
+    String opposingStance = "for";
+    if (widget.stance == 'for') {
+      opposingStance = "against";
+    }
+    opposingStance = widget.topic + ' - ' + opposingStance;
     isSearching = true;
     setState(() {});
-    userStream = await DatabaseMethods().getUserbyTopic(opposing);
+    userStream = await DatabaseMethods().getUserbyTopic(opposingStance);
     setState(() {});
   }
 
@@ -52,8 +57,6 @@ class _Searching extends State<Searching> with WidgetsBindingObserver {
       opposingStance = "against";
     }
     opposingStance = widget.topic + ' - ' + opposingStance;
-    DatabaseMethods()
-        .addUserToTopic(widget.topic, widget.stance, widget.myUserName);
     return StreamBuilder(
       stream: userStream,
       builder: (context, snapshot) {
@@ -65,6 +68,7 @@ class _Searching extends State<Searching> with WidgetsBindingObserver {
                   // A DocumentSnapshot contains data read from a document in your Cloud Firestore database
                   DocumentSnapshot ds = snapshot.data.docs[0];
                   String matchedUser = ds.id;
+                  DatabaseMethods().removeUserFromTopic(widget.myUserName);
                   return goToChat(matchedUser);
                 },
               )
@@ -83,6 +87,9 @@ class _Searching extends State<Searching> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    DatabaseMethods()
+        .addUserToTopic(widget.topic, widget.stance, widget.myUserName);
+    getOtherUser();
   }
 
   void dispose() {
@@ -91,25 +98,57 @@ class _Searching extends State<Searching> with WidgetsBindingObserver {
   }
 
   @override
-  Widget build(BuildContext context) {
-    String opposingStance = "for";
-    if (widget.stance == 'for') {
-      opposingStance = "against";
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    if (state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.paused) return;
+
+    final isDetached = state == AppLifecycleState.detached;
+
+    if (isDetached) {
+      DatabaseMethods().removeUserFromTopic(widget.myUserName);
     }
-    opposingStance = widget.topic + ' - ' + opposingStance;
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Searching"),
-        ),
-        body: Container(
-            margin: EdgeInsets.symmetric(horizontal: 24),
-            child: ListView(children: [
-              ElevatedButton(
-                  onPressed: () {
-                    getOtherUser(opposingStance);
-                  },
-                  child: Text('Search')),
-              isSearching ? connectUsers() : chatRoomsList()
-            ])));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    //removes the user from the queue if they leave the searching page
+    return WillPopScope(
+        onWillPop: () async {
+          CollectionReference system =
+              FirebaseFirestore.instance.collection('pairing_system');
+          system
+              .doc(widget.myUserName)
+              .delete()
+              .then((value) => print("User Deleted"))
+              .catchError((error) => print("Failed to delete user: $error"));
+          return true;
+        },
+        child: new Scaffold(
+            appBar: AppBar(title: Text("Searching")),
+            body: Container(
+                //Streams data from the database to find a match
+                child: StreamBuilder(
+              stream: userStream,
+              builder: (context, snapshot) {
+                return snapshot.hasData
+                    ? ListView.builder(
+                        itemCount: snapshot.data.docs.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          // A DocumentSnapshot contains data read from a document in your Cloud Firestore database
+                          DocumentSnapshot ds = snapshot.data.docs[0];
+                          String matchedUser = ds.id;
+                          DatabaseMethods()
+                              .removeUserFromTopic(widget.myUserName);
+                          return goToChat(matchedUser);
+                        },
+                      )
+                    : Center(
+                        child: CircularProgressIndicator(),
+                      );
+              },
+            ))));
   }
 }
