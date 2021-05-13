@@ -18,6 +18,13 @@ class DatabaseMethods {
         .snapshots();
   }
 
+  Future<Stream<QuerySnapshot>> getUserbyTopic(String opposing) async {
+    return FirebaseFirestore.instance
+        .collection("pairing_system")
+        .where("topic-stance", isEqualTo: opposing)
+        .snapshots();
+  }
+
   Future addMessage(
       String chatRoomId, String messageId, Map messageInfoMap) async {
     return FirebaseFirestore.instance
@@ -26,6 +33,21 @@ class DatabaseMethods {
         .collection("chats")
         .doc(messageId)
         .set(messageInfoMap);
+  }
+
+  addUserToTopic(String topic, String stance, String user) {
+    String topicStance = topic + " - " + stance;
+    FirebaseFirestore.instance
+        .collection("pairing_system")
+        .doc(user)
+        .set({"user": user, "topic-stance": topicStance});
+  }
+
+  Future<void> removeUserFromTopic(String user) {
+    return FirebaseFirestore.instance
+        .collection('pairing_system')
+        .doc(user)
+        .delete();
   }
 
   updateLastMessageSend(String chatRoomId, Map lastMessageInfoMap) {

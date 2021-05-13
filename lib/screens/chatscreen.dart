@@ -84,11 +84,6 @@ class _ChatScreenState extends State<ChatScreen> {
       children: [
         Flexible(
           child: Container(
-              // could be a good idead to change these constraints in the future since they
-              // were only tested on an iphone 12 pro max in portriat orientation
-              // if the constraints are removed the text will just go from one end of the
-              // screen to another so it isnt the end of the world if we don't use them
-              constraints: BoxConstraints(minWidth: 0, maxWidth: 325),
               margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -99,7 +94,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   bottomLeft:
                       sendByMe ? Radius.circular(24) : Radius.circular(10),
                 ),
-                // if its sent by me make it blue, otherwise make it another colow
+                // makes it so that if its sent by me make it blue, otherwise make it another color
                 color: sendByMe ? Colors.blue : Colors.grey,
               ),
               padding: EdgeInsets.all(16),
@@ -138,6 +133,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   doThisOnLaunch() async {
     await getMyInfoFromSharedPreference();
+    DatabaseMethods().removeUserFromTopic(myUserName);
     getAndSetMessages();
   }
 

@@ -1,4 +1,3 @@
-import 'package:open_mind/screens/home.dart';
 import 'package:open_mind/widgets/navbar.dart';
 import 'package:flutter/material.dart';
 
