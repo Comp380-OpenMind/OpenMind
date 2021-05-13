@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:open_mind/screens/home.dart';
@@ -7,8 +6,6 @@ import 'package:open_mind/screens/signin.dart';
 import 'package:open_mind/screens/settings.dart';
 import 'package:open_mind/screens/profile.dart';
 import 'package:open_mind/screens/search.dart';
-import 'package:open_mind/services/auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NavBar extends StatelessWidget {
   userProfileImageGrabber() {
@@ -53,7 +50,7 @@ class NavBar extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.verified_user),
+            leading: Icon(Icons.account_circle),
             title: Text('Profile'),
             onTap: () => {
               Navigator.pushReplacement(context,
@@ -72,8 +69,8 @@ class NavBar extends StatelessWidget {
             leading: Icon(Icons.settings),
             title: Text('Settings'),
             onTap: () => {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => OpenMindSettings()))
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => Settings()))
             },
           ),
           ListTile(

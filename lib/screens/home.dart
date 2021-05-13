@@ -15,7 +15,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   bool isSearching = false;
-  Timer _timer;
   Stream usersStream;
   String myName, myProfilePic, myUserName, myEmail;
 
@@ -196,7 +195,7 @@ class _HomeState extends State<Home> {
                                               topic, stance, myUserName)));
                                 },
                                 title: Text(
-                                  'I am for this topic',
+                                  'Guns should be restricted',
                                   textAlign: TextAlign.center,
                                 )),
                             Divider(
@@ -215,7 +214,7 @@ class _HomeState extends State<Home> {
                                               topic, stance, myUserName)));
                                 },
                                 title: Text(
-                                  'I am against this topic',
+                                  'Guns should not be restricted',
                                   textAlign: TextAlign.center,
                                 ))
                           ],
@@ -234,18 +233,38 @@ class _HomeState extends State<Home> {
                           ),
                           children: [
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Abortion';
+                                  String stance = 'for';
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
+                                },
                                 title: Text(
-                                  'I am for this topic',
+                                  'I am pro-choice',
                                   textAlign: TextAlign.center,
                                 )),
                             Divider(
                               thickness: 1.5,
                             ),
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Abortion';
+                                  String stance = 'against';
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
+                                },
                                 title: Text(
-                                  'I am against this topic',
+                                  'I am anti-abortion',
                                   textAlign: TextAlign.center,
                                 ))
                           ],
@@ -264,18 +283,38 @@ class _HomeState extends State<Home> {
                           ),
                           children: [
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Religious Freedom';
+                                  String stance = 'for';
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
+                                },
                                 title: Text(
-                                  'I am for this topic',
+                                  'I support religious freedom',
                                   textAlign: TextAlign.center,
                                 )),
                             Divider(
                               thickness: 1.5,
                             ),
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Religious Freedom';
+                                  String stance = 'against';
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
+                                },
                                 title: Text(
-                                  'I am against this topic',
+                                  'I am against religious freedom',
                                   textAlign: TextAlign.center,
                                 ))
                           ],
@@ -294,18 +333,38 @@ class _HomeState extends State<Home> {
                           ),
                           children: [
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Animal Rights';
+                                  String stance = 'for';
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
+                                },
                                 title: Text(
-                                  'I am for this topic',
+                                  'I support animal rights',
                                   textAlign: TextAlign.center,
                                 )),
                             Divider(
                               thickness: 1.5,
                             ),
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Animal Rights';
+                                  String stance = 'against';
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
+                                },
                                 title: Text(
-                                  'I am against this topic',
+                                  'I am against animal rights',
                                   textAlign: TextAlign.center,
                                 ))
                           ],
@@ -324,18 +383,38 @@ class _HomeState extends State<Home> {
                           ),
                           children: [
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Vaccines';
+                                  String stance = 'for';
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
+                                },
                                 title: Text(
-                                  'I am for this topic',
+                                  'I think everyone should be vaccinated',
                                   textAlign: TextAlign.center,
                                 )),
                             Divider(
                               thickness: 1.5,
                             ),
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Vaccines';
+                                  String stance = 'against';
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
+                                },
                                 title: Text(
-                                  'I am against this topic',
+                                  'I believe vaccines are dangerous',
                                   textAlign: TextAlign.center,
                                 ))
                           ],
@@ -354,18 +433,38 @@ class _HomeState extends State<Home> {
                           ),
                           children: [
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Privacy Rights';
+                                  String stance = 'for';
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
+                                },
                                 title: Text(
-                                  'I am for this topic',
+                                  'I support our right to privacy',
                                   textAlign: TextAlign.center,
                                 )),
                             Divider(
                               thickness: 1.5,
                             ),
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Privacy Rights';
+                                  String stance = 'against';
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
+                                },
                                 title: Text(
-                                  'I am against this topic',
+                                  'I am against this our right to privacy',
                                   textAlign: TextAlign.center,
                                 ))
                           ],
@@ -375,27 +474,47 @@ class _HomeState extends State<Home> {
                         ),
                         ExpansionTile(
                           trailing: SizedBox.shrink(),
-                          title: Text('Global Climate Change',
+                          title: Text('Climate Change',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontWeight: FontWeight.w500)),
                           subtitle: Text(
-                            'Global Climate Change info...',
+                            'Climate Change info...',
                             textAlign: TextAlign.center,
                           ),
                           children: [
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Climate Change';
+                                  String stance = 'for';
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
+                                },
                                 title: Text(
-                                  'I am for this topic',
+                                  'I believe in climate change',
                                   textAlign: TextAlign.center,
                                 )),
                             Divider(
                               thickness: 1.5,
                             ),
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Climate Change';
+                                  String stance = 'against';
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
+                                },
                                 title: Text(
-                                  'I am against this topic',
+                                  'I dont believe in climate change',
                                   textAlign: TextAlign.center,
                                 ))
                           ],
@@ -414,18 +533,38 @@ class _HomeState extends State<Home> {
                           ),
                           children: [
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Evolution';
+                                  String stance = 'for';
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
+                                },
                                 title: Text(
-                                  'I am for this topic',
+                                  'I believe in evolution',
                                   textAlign: TextAlign.center,
                                 )),
                             Divider(
                               thickness: 1.5,
                             ),
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Evolution';
+                                  String stance = 'against';
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
+                                },
                                 title: Text(
-                                  'I am against this topic',
+                                  'I dont believe in evolution',
                                   textAlign: TextAlign.center,
                                 ))
                           ],
@@ -444,9 +583,19 @@ class _HomeState extends State<Home> {
                           ),
                           children: [
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Marriage Equality';
+                                  String stance = 'for';
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
+                                },
                                 title: Text(
-                                  'I am for this topic',
+                                  'I support marriage equality',
                                   textAlign: TextAlign.center,
                                 )),
                             Divider(
@@ -455,7 +604,7 @@ class _HomeState extends State<Home> {
                             ListTile(
                                 onTap: () {},
                                 title: Text(
-                                  'I am against this topic',
+                                  'I am against marriage equality',
                                   textAlign: TextAlign.center,
                                 ))
                           ],
@@ -474,18 +623,38 @@ class _HomeState extends State<Home> {
                           ),
                           children: [
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Transgender Rights';
+                                  String stance = 'for';
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
+                                },
                                 title: Text(
-                                  'I am for this topic',
+                                  'I support transgender rights',
                                   textAlign: TextAlign.center,
                                 )),
                             Divider(
                               thickness: 1.5,
                             ),
                             ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  String topic = 'Transgender Rights';
+                                  String stance = 'against';
+                                  DatabaseMethods().addUserToTopic(
+                                      topic, stance, myUserName);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Searching(
+                                              topic, stance, myUserName)));
+                                },
                                 title: Text(
-                                  'I am against this topic',
+                                  'I am against transgender rights',
                                   textAlign: TextAlign.center,
                                 ))
                           ],

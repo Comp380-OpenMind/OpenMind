@@ -5,12 +5,20 @@ import 'package:open_mind/screens/signin.dart';
 import 'package:open_mind/services/auth.dart';
 
 void main() async {
+  dynamic color = Colors.indigo;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(MyApp(color));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  final color;
+  MyApp(this.color);
+  @override
+  _MyApp createState() => _MyApp();
+}
+
+class _MyApp extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         //sets the main color of the whole application
-        primarySwatch: Colors.indigo,
+        primarySwatch: widget.color,
       ),
       home: FutureBuilder(
         future: AuthMethods().getCurrentUser(),
