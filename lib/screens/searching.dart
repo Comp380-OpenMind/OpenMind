@@ -47,7 +47,7 @@ class _Searching extends State<Searching> with WidgetsBindingObserver {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => ChatScreen(matchedUser, matchedUser)));
+              builder: (context) => ChatScreen(matchedUser, widget.topic)));
       // Add Your Code here.
     });
   }
@@ -115,7 +115,7 @@ class _Searching extends State<Searching> with WidgetsBindingObserver {
                         return goToChat(matchedUser);
                       },
                     )
-                  : Center(child: CircularProgressIndicator());
+                  : Center();
             },
           )
         ]));
