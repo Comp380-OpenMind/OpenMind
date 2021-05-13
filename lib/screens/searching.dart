@@ -11,7 +11,6 @@ class Searching extends StatefulWidget {
 }
 
 class _Searching extends State<Searching> with WidgetsBindingObserver {
-  bool isSearching = false;
   bool isFound = false;
   Stream userStream;
 
@@ -30,7 +29,6 @@ class _Searching extends State<Searching> with WidgetsBindingObserver {
       opposingStance = "against";
     }
     opposingStance = widget.topic + ' - ' + opposingStance;
-    isSearching = true;
     setState(() {});
     userStream = await DatabaseMethods().getUserbyTopic(opposingStance);
     setState(() {});
