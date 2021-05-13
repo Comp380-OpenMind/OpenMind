@@ -179,10 +179,6 @@ class _HomeState extends State<Home> {
                           title: Text('Gun Control',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontWeight: FontWeight.w500)),
-                          subtitle: Text(
-                            'Gun Control info...',
-                            textAlign: TextAlign.center,
-                          ),
                           children: [
                             ListTile(
                                 onTap: () {
@@ -227,10 +223,6 @@ class _HomeState extends State<Home> {
                           title: Text('Abortion',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontWeight: FontWeight.w500)),
-                          subtitle: Text(
-                            'Abortion info...',
-                            textAlign: TextAlign.center,
-                          ),
                           children: [
                             ListTile(
                                 onTap: () {
@@ -277,10 +269,6 @@ class _HomeState extends State<Home> {
                           title: Text('Religious Freedom',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontWeight: FontWeight.w500)),
-                          subtitle: Text(
-                            'Religious Freedom info...',
-                            textAlign: TextAlign.center,
-                          ),
                           children: [
                             ListTile(
                                 onTap: () {
@@ -327,10 +315,6 @@ class _HomeState extends State<Home> {
                           title: Text('Animal Rights',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontWeight: FontWeight.w500)),
-                          subtitle: Text(
-                            'Animal Rights info...',
-                            textAlign: TextAlign.center,
-                          ),
                           children: [
                             ListTile(
                                 onTap: () {
@@ -377,10 +361,6 @@ class _HomeState extends State<Home> {
                           title: Text('Vaccines',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontWeight: FontWeight.w500)),
-                          subtitle: Text(
-                            'Vaccines info...',
-                            textAlign: TextAlign.center,
-                          ),
                           children: [
                             ListTile(
                                 onTap: () {
@@ -427,10 +407,6 @@ class _HomeState extends State<Home> {
                           title: Text('Privacy Rights',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontWeight: FontWeight.w500)),
-                          subtitle: Text(
-                            'Privacy Rights info...',
-                            textAlign: TextAlign.center,
-                          ),
                           children: [
                             ListTile(
                                 onTap: () {
@@ -464,7 +440,7 @@ class _HomeState extends State<Home> {
                                               topic, stance, myUserName)));
                                 },
                                 title: Text(
-                                  'I am against this our right to privacy',
+                                  'I dont believe we have a right to privacy',
                                   textAlign: TextAlign.center,
                                 ))
                           ],
@@ -477,10 +453,6 @@ class _HomeState extends State<Home> {
                           title: Text('Climate Change',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontWeight: FontWeight.w500)),
-                          subtitle: Text(
-                            'Climate Change info...',
-                            textAlign: TextAlign.center,
-                          ),
                           children: [
                             ListTile(
                                 onTap: () {
@@ -527,10 +499,6 @@ class _HomeState extends State<Home> {
                           title: Text('Evolution',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontWeight: FontWeight.w500)),
-                          subtitle: Text(
-                            'Evolution info...',
-                            textAlign: TextAlign.center,
-                          ),
                           children: [
                             ListTile(
                                 onTap: () {
@@ -577,10 +545,6 @@ class _HomeState extends State<Home> {
                           title: Text('Marriage Equality',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontWeight: FontWeight.w500)),
-                          subtitle: Text(
-                            'Marriage Equality...',
-                            textAlign: TextAlign.center,
-                          ),
                           children: [
                             ListTile(
                                 onTap: () {
@@ -617,10 +581,6 @@ class _HomeState extends State<Home> {
                           title: Text('Transgender Rights',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontWeight: FontWeight.w500)),
-                          subtitle: Text(
-                            'Transgender Rights info...',
-                            textAlign: TextAlign.center,
-                          ),
                           children: [
                             ListTile(
                                 onTap: () {
