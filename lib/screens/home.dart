@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:open_mind/helperfunctions/sharedpref_helper.dart';
@@ -29,86 +28,6 @@ class _HomeState extends State<Home> {
     setState(() {});
   }
 
-  getChatRoomIdByUsernames(String a, String b) {
-    if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
-      return "$b\_$a";
-    } else {
-      return "$a\_$b";
-    }
-  }
-
-  onSearchBtnClick() async {
-    isSearching = true;
-    setState(() {});
-    usersStream = await DatabaseMethods()
-        .getUserbyUserName(searchUsernameEditingController.text);
-
-    setState(() {});
-  }
-
-  // returns all the information for the person the user searched
-  Widget searchListUserTile({String profileUrl, name, username, email}) {
-    return GestureDetector(
-      onTap: () {
-        var chatRoomId = getChatRoomIdByUsernames(myUserName, username);
-        Map<String, dynamic> chatRoomInfoMap = {
-          "users": [myUserName, username]
-        };
-
-        DatabaseMethods().createChatRoom(chatRoomId, chatRoomInfoMap);
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ChatScreen(username, name)));
-      },
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(40),
-            child: Image.network(
-              profileUrl,
-              height: 30,
-              width: 30,
-            ),
-          ),
-          SizedBox(width: 12),
-          Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Text(name), Text(email)])
-        ],
-      ),
-    );
-  }
-
-  Widget searchUsersList() {
-    return StreamBuilder(
-      stream: usersStream,
-      builder: (context, snapshot) {
-        return snapshot.hasData
-            ? ListView.builder(
-                itemCount: snapshot.data.docs.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  // A DocumentSnapshot contains data read from a document in your Cloud Firestore database
-                  DocumentSnapshot ds = snapshot.data.docs[index];
-                  return searchListUserTile(
-                      profileUrl: ds.data()["imgUrl"],
-                      name: ds.data()["name"],
-                      email: ds.data()["email"],
-                      username: ds.data()["username"]);
-                },
-              )
-            : Center(
-                child: CircularProgressIndicator(),
-              );
-      },
-    );
-  }
-
-  Widget chatRoomsList() {
-    return Container();
-  }
-
   @override
   void initState() {
     getMyInfoFromSharedPreference();
@@ -124,47 +43,38 @@ class _HomeState extends State<Home> {
             margin: EdgeInsets.symmetric(horizontal: 24),
             child: ListView(
               children: [
-                Row(
-                  children: [
-                    // username search bar
-                    Expanded(
-                      child: Container(
-                        margin: EdgeInsets.symmetric(vertical: 16),
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Colors.grey,
-                                width: 1.0,
-                                style: BorderStyle.solid),
-                            borderRadius: BorderRadius.circular(24)),
-                        child: Row(
+                Container(
+                  child: Card(
+                    child: Column(
+                      children: [
+                        ExpansionTile(
+                          leading: Icon(Icons.help_outline),
+                          title: Text(
+                              "Click here for a little help before you get started!"),
                           children: [
-                            Expanded(
-                                child: TextField(
-                              controller: searchUsernameEditingController,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "username"),
-                            )),
-                            GestureDetector(
-                                //when the search button is tapped
-                                onTap: () {
-                                  // will only execute if there is text in the search bar
-                                  if (searchUsernameEditingController.text !=
-                                      "") {
-                                    onSearchBtnClick();
-                                  }
-                                },
-                                child: Icon(Icons.search))
+                            ListTile(
+                                leading: Icon(Icons.check),
+                                title: Text(
+                                    "Click on a topic and then choose what stance you would like to take."),
+                                trailing: SizedBox.shrink()),
+                            ListTile(
+                                leading: Icon(Icons.check),
+                                title: Text(
+                                    "Once you choose your stance on a topic you will wait in a queue until someone joins that has the opposite stance."),
+                                trailing: SizedBox.shrink()),
+                            ListTile(
+                                leading: Icon(Icons.close_outlined),
+                                title: Text(
+                                    "When in a chatroom don't be rude or disrespectful."),
+                                subtitle: Text(
+                                    "Have civil conversations to make the experience better for everyone."),
+                                trailing: SizedBox.shrink())
                           ],
-                        ),
-                      ),
+                        )
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-                // if the user is searching show the users list, if not then show the chat rooms list
-                isSearching ? searchUsersList() : chatRoomsList(),
-
                 // here are the topic widgets
                 // there are ontap prompts on the ListTile sections
                 // linking to new pages can be done there
