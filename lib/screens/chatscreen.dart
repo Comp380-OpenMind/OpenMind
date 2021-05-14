@@ -5,8 +5,8 @@ import 'package:open_mind/services/database.dart';
 import 'package:random_string/random_string.dart';
 
 class ChatScreen extends StatefulWidget {
-  final String chatWithUsername, name;
-  ChatScreen(this.chatWithUsername, this.name);
+  final String chatWithUsername, topic;
+  ChatScreen(this.chatWithUsername, this.topic);
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -148,7 +148,7 @@ class _ChatScreenState extends State<ChatScreen> {
     // Creates a bar at the top with the name
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.name),
+        title: Text(widget.topic),
       ),
       body: Container(
         child: Stack(

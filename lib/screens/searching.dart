@@ -11,7 +11,6 @@ class Searching extends StatefulWidget {
 }
 
 class _Searching extends State<Searching> with WidgetsBindingObserver {
-  bool isSearching = false;
   bool isFound = false;
   Stream userStream;
 
@@ -30,7 +29,6 @@ class _Searching extends State<Searching> with WidgetsBindingObserver {
       opposingStance = "against";
     }
     opposingStance = widget.topic + ' - ' + opposingStance;
-    isSearching = true;
     setState(() {});
     userStream = await DatabaseMethods().getUserbyTopic(opposingStance);
     setState(() {});
@@ -47,7 +45,7 @@ class _Searching extends State<Searching> with WidgetsBindingObserver {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => ChatScreen(matchedUser, matchedUser)));
+              builder: (context) => ChatScreen(matchedUser, widget.topic)));
       // Add Your Code here.
     });
   }
@@ -80,6 +78,25 @@ class _Searching extends State<Searching> with WidgetsBindingObserver {
     }
   }
 
+  Widget streamUsers() {
+    return StreamBuilder(
+        stream: userStream,
+        builder: (context, snapshot) {
+          return snapshot.hasData
+              ? ListView.builder(
+                  itemCount: snapshot.data.docs.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    // A DocumentSnapshot contains data read from a document in your Cloud Firestore database
+                    DocumentSnapshot ds = snapshot.data.docs[0];
+                    String matchedUser = ds.id;
+                    return goToChat(matchedUser);
+                  },
+                )
+              : Container();
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     //removes the user from the queue if they leave the searching page
@@ -101,23 +118,7 @@ class _Searching extends State<Searching> with WidgetsBindingObserver {
                   //Streams data from the database to find a match
                   child: Center(child: CircularProgressIndicator()))),
           //constantly check database for users looking for the same convo
-          StreamBuilder(
-            stream: userStream,
-            builder: (context, snapshot) {
-              return snapshot.hasData
-                  ? ListView.builder(
-                      itemCount: snapshot.data.docs.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        // A DocumentSnapshot contains data read from a document in your Cloud Firestore database
-                        DocumentSnapshot ds = snapshot.data.docs[0];
-                        String matchedUser = ds.id;
-                        return goToChat(matchedUser);
-                      },
-                    )
-                  : Center(child: CircularProgressIndicator());
-            },
-          )
+          streamUsers()
         ]));
   }
 }
