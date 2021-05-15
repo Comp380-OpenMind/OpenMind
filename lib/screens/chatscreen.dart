@@ -95,7 +95,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       sendByMe ? Radius.circular(24) : Radius.circular(10),
                 ),
                 // makes it so that if its sent by me make it blue, otherwise make it another color
-                color: sendByMe ? Colors.blue : Colors.grey,
+                color: sendByMe ? Theme.of(context).accentColor : Colors.grey,
               ),
               padding: EdgeInsets.all(16),
               child: Text(
