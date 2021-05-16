@@ -52,7 +52,10 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.account_circle),
             title: Text('Profile'),
-            onTap: () => {},
+            onTap: () => {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()))
+            },
           ),
           ListTile(
             leading: Icon(Icons.search),
