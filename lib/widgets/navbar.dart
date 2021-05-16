@@ -5,7 +5,7 @@ import 'package:open_mind/services/auth.dart';
 import 'package:open_mind/screens/signin.dart';
 import 'package:open_mind/screens/settings.dart';
 import 'package:open_mind/screens/profile.dart';
-import 'package:open_mind/screens/search.dart';
+import 'package:open_mind/screens/userSearch.dart';
 
 class NavBar extends StatelessWidget {
   userProfileImageGrabber() {
@@ -54,7 +54,7 @@ class NavBar extends StatelessWidget {
             title: Text('Profile'),
             onTap: () => {
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => OpenMindProfile()))
+                  MaterialPageRoute(builder: (context) => ProfilePage()))
             },
           ),
           ListTile(
@@ -77,10 +77,34 @@ class NavBar extends StatelessWidget {
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
             onTap: () => {
-              AuthMethods().signOut().then((s) {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) => SignIn()));
-              })
+              showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                        title: Text("Warning!", textAlign: TextAlign.center),
+                        content: Text(
+                          "Are you sure you want to logout?",
+                          textAlign: TextAlign.center,
+                        ),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("no")),
+                          TextButton(
+                              onPressed: () {
+                                AuthMethods().signOut().then((s) {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SignIn()));
+                                });
+                              },
+                              child: Text("yes")),
+                        ],
+                        elevation: 24,
+                      ),
+                  barrierDismissible: false)
             },
           ),
         ],
