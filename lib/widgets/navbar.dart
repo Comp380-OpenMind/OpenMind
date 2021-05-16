@@ -88,7 +88,7 @@ class NavBar extends StatelessWidget {
                         actions: [
                           TextButton(
                               onPressed: () {
-                                Navigator.of(context).pop();
+                                Navigator.pop(context);
                               },
                               child: Text("no")),
                           TextButton(
