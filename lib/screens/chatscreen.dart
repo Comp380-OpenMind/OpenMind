@@ -4,6 +4,8 @@ import 'package:open_mind/helperfunctions/sharedpref_helper.dart';
 import 'package:open_mind/services/database.dart';
 import 'package:random_string/random_string.dart';
 
+import 'home.dart';
+
 class ChatScreen extends StatefulWidget {
   final String chatWithUsername, topic;
   ChatScreen(this.chatWithUsername, this.topic);
@@ -143,48 +145,109 @@ class _ChatScreenState extends State<ChatScreen> {
     super.initState();
   }
 
-  @override
   Widget build(BuildContext context) {
-    // Creates a bar at the top with the name
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.topic),
-      ),
-      body: Container(
-        child: Stack(
-          children: [
-            chatMessages(),
-            Container(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                  // makes the widget an opaque black
-                  color: Colors.black.withOpacity(0.8),
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Row(
-                    children: [
-                      Expanded(
-                          // text the user inputs
-                          child: TextField(
-                        controller: messageTextEditingController,
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Type a message",
-                            hintStyle: TextStyle(
-                                color: Colors.white.withOpacity(0.6))),
+    //removes the user from the queue if they leave the searching page
+    return WillPopScope(
+        onWillPop: () {
+          return showDialog(
+              context: context,
+              builder: (ctx) => AlertDialog(
+                    title: Center(child: Text('Rate')),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Container(
+                          child: Text(
+                            "Did this user abide by the rules and keep an open mind?",
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  TextButton(
+                                      child: Icon(Icons.thumb_up),
+                                      onPressed: () {
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .pop();
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Home()));
+                                      }),
+                                  TextButton(
+                                      child: Icon(Icons.thumb_down),
+                                      onPressed: () {
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .pop();
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Home()));
+                                      }),
+                                ]),
+                            TextButton(
+                                child: Text('Report',
+                                    style: TextStyle(color: Colors.red)),
+                                onPressed: () {
+                                  Navigator.of(context, rootNavigator: true)
+                                      .pop();
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Home()));
+                                }),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+              barrierDismissible: false);
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(widget.topic),
+          ),
+          body: Container(
+            child: Stack(
+              children: [
+                chatMessages(),
+                Container(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                      // makes the widget an opaque black
+                      color: Colors.black.withOpacity(0.8),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              // text the user inputs
+                              child: TextField(
+                            controller: messageTextEditingController,
+                            style: TextStyle(color: Colors.white),
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Type a message",
+                                hintStyle: TextStyle(
+                                    color: Colors.white.withOpacity(0.6))),
+                          )),
+                          GestureDetector(
+                            onTap: () {
+                              addMessage(true);
+                            },
+                            child: Icon(Icons.send, color: Colors.white),
+                          ),
+                        ],
                       )),
-                      GestureDetector(
-                        onTap: () {
-                          addMessage(true);
-                        },
-                        child: Icon(Icons.send, color: Colors.white),
-                      ),
-                    ],
-                  )),
-            )
-          ],
-        ),
-      ),
-    );
+                )
+              ],
+            ),
+          ),
+        ));
   }
 }
