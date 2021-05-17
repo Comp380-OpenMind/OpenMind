@@ -9,6 +9,10 @@ class DatabaseMethods {
         .set(userInfoMap);
   }
 
+  Future<void> removeUserFromDB(String userID) {
+    return FirebaseFirestore.instance.collection('users').doc(userID).delete();
+  }
+
   //search a user by username
   Future<Stream<QuerySnapshot>> getUserbyUserName(String username) async {
     //FirebaseFirestore.instance allows us to access the database

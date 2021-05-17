@@ -29,6 +29,7 @@ dependencies:
   shared_preferences:
   random_string:
   cloud_firestore:
+  settings_ui: 
 
 
   # The following adds the Cupertino Icons font to your application.
