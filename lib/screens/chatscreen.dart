@@ -161,6 +161,9 @@ class _ChatScreenState extends State<ChatScreen> {
                             TextButton(
                                 child: Icon(Icons.thumb_up),
                                 onPressed: () {
+                                  DatabaseMethods().deleteChatroom(chatRoomId);
+                                  DatabaseMethods()
+                                      .deleteChatroomChats(chatRoomId);
                                   Navigator.of(context, rootNavigator: true)
                                       .pop();
                                   Navigator.pushReplacement(
@@ -171,6 +174,9 @@ class _ChatScreenState extends State<ChatScreen> {
                             TextButton(
                                 child: Icon(Icons.thumb_down),
                                 onPressed: () {
+                                  DatabaseMethods().deleteChatroom(chatRoomId);
+                                  DatabaseMethods()
+                                      .deleteChatroomChats(chatRoomId);
                                   Navigator.of(context, rootNavigator: true)
                                       .pop();
                                   Navigator.pushReplacement(
