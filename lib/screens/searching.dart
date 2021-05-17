@@ -36,7 +36,7 @@ class _Searching extends State<Searching> with WidgetsBindingObserver {
 
   goToChat(String matchedUser) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      var chatRoomId = getChatRoomIdByUsernames(matchedUser, matchedUser);
+      var chatRoomId = getChatRoomIdByUsernames(widget.myUserName, matchedUser);
       Map<String, dynamic> chatRoomInfoMap = {
         "users": [widget.myUserName, matchedUser]
       };

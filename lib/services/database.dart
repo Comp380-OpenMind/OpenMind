@@ -54,6 +54,13 @@ class DatabaseMethods {
         .delete();
   }
 
+  Future<void> deleteChatroom(String chatRoomId) {
+    return FirebaseFirestore.instance
+        .collection('chatrooms')
+        .doc(chatRoomId)
+        .delete();
+  }
+
   updateLastMessageSend(String chatRoomId, Map lastMessageInfoMap) {
     return FirebaseFirestore.instance
         .collection("chatrooms")

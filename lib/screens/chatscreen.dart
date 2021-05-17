@@ -135,8 +135,66 @@ class _ChatScreenState extends State<ChatScreen> {
 
   doThisOnLaunch() async {
     await getMyInfoFromSharedPreference();
-    DatabaseMethods().removeUserFromTopic(myUserName);
     getAndSetMessages();
+    DatabaseMethods().removeUserFromTopic(myUserName);
+  }
+
+  popup(chatRoomId) {
+    showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+              title: Center(child: Text('Rate')),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    child: Text(
+                      "Did this user abide by the rules and keep an open mind?",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                                child: Icon(Icons.thumb_up),
+                                onPressed: () {
+                                  Navigator.of(context, rootNavigator: true)
+                                      .pop();
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Home()));
+                                }),
+                            TextButton(
+                                child: Icon(Icons.thumb_down),
+                                onPressed: () {
+                                  Navigator.of(context, rootNavigator: true)
+                                      .pop();
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Home()));
+                                }),
+                          ]),
+                      TextButton(
+                          child: Text('Report',
+                              style: TextStyle(color: Colors.red)),
+                          onPressed: () {
+                            Navigator.of(context, rootNavigator: true).pop();
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Home()));
+                          }),
+                    ],
+                  )
+                ],
+              ),
+            ),
+        barrierDismissible: false);
   }
 
   @override
@@ -149,64 +207,7 @@ class _ChatScreenState extends State<ChatScreen> {
     //removes the user from the queue if they leave the searching page
     return WillPopScope(
         onWillPop: () {
-          return showDialog(
-              context: context,
-              builder: (ctx) => AlertDialog(
-                    title: Center(child: Text('Rate')),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Container(
-                          child: Text(
-                            "Did this user abide by the rules and keep an open mind?",
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        Column(
-                          children: [
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  TextButton(
-                                      child: Icon(Icons.thumb_up),
-                                      onPressed: () {
-                                        Navigator.of(context,
-                                                rootNavigator: true)
-                                            .pop();
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => Home()));
-                                      }),
-                                  TextButton(
-                                      child: Icon(Icons.thumb_down),
-                                      onPressed: () {
-                                        Navigator.of(context,
-                                                rootNavigator: true)
-                                            .pop();
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => Home()));
-                                      }),
-                                ]),
-                            TextButton(
-                                child: Text('Report',
-                                    style: TextStyle(color: Colors.red)),
-                                onPressed: () {
-                                  Navigator.of(context, rootNavigator: true)
-                                      .pop();
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Home()));
-                                }),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-              barrierDismissible: false);
+          return popup(chatRoomId);
         },
         child: Scaffold(
           appBar: AppBar(

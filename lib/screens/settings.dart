@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:open_mind/helperfunctions/sharedpref_helper.dart';
 import 'package:open_mind/screens/signin.dart';
 import 'package:open_mind/services/database.dart';
 import 'package:open_mind/widgets/navbar.dart';
@@ -91,7 +89,7 @@ class _Settings extends State<Settings> {
         ));
   }
 
-  Widget deletePopup() {
+  void deletePopup() {
     showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
